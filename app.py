@@ -6,24 +6,27 @@ import pandas as pd
 
 DATA_FILE = "farms.json"
 
-if not os.path.exists(DATA_FILE):
-    with open(DATA_FILE, "w") as f:
-        json.dump({"jas": []}, f)
-
 def load_data():
-    with open(DATA_FILE, "r") as f:
-        return json.load(f)
+    if not os.path.exists(DATA_FILE):
+        # 初期化
+        with open(DATA_FILE, "w") as f:
+            json.dump({"jas": []}, f)
+        return {"jas": []}
+    else:
+        with open(DATA_FILE, "r") as f:
+            return json.load(f)
 
 def save_data(data):
     with open(DATA_FILE, "w") as f:
         json.dump(data, f, indent=2)
+
+data = load_data()
 
 st.sidebar.title("農地管理メニュー")
 menu = st.sidebar.selectbox("選択してください", [
     "地図表示", "農協登録", "農家登録", "農地登録", "農地編集", "農地ナビ取込"
 ])
 
-data = load_data()
 st.title("農地管理クラウドシステム（β）")
 
 # ----------------------
