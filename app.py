@@ -34,7 +34,8 @@ data = load_data()
 if menu == "地図表示":
     center_lat, center_lon = 34.230532, 135.170785  # 和歌山市役所
     
-    map = folium.Map(location=[center_lat, center_lon], zoom_start=14, tiles="Stamen Terrain")
+    map = folium.Map(location=[center_lat, center_lon], zoom_start=14, tiles="OpenStreetMap")
+
 
     # 農地が登録されていればピン表示
     for c in data["clients"]:
